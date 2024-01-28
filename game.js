@@ -111,6 +111,10 @@ let spaceFacts=[
 
    audio= document.getElementById("audio");
     music.volume=.2;
+    pop.volume=.2;
+    recharge.volume=.2;
+    damage.volume=.2;
+    game_end.volume=.2;
     audio.onclick = function() {
         if(music.paused){
             music.play();
@@ -274,30 +278,30 @@ let spaceFacts=[
     
     
     function keyDownHandler(e){
-    if(e.keyCode == 39){
+        if(e.keyCode == 39||e.keyCode==68){
         rightPressed = true;
     }
-    else if(e.keyCode == 37){
+    else if(e.keyCode == 37||e.keyCode==65){
         leftPressed = true;
     }
-    else if(e.keyCode == 38){
+    else if(e.keyCode == 38||e.keyCode==87){
         upPressed = true;
     }
-    else if(e.keyCode == 40){
+    else if(e.keyCode == 40||e.keyCode==83){
         downPressed = true;
     }}
     
     function keyUpHandler(e){
-    if(e.keyCode == 39){
+    if(e.keyCode == 39||e.keyCode==68){
         rightPressed = false;
     }
-    else if(e.keyCode == 37){
+    else if(e.keyCode == 37||e.keyCode==65){
         leftPressed = false;
     }
-    else if(e.keyCode == 38){
+    else if(e.keyCode == 38||e.keyCode==87){
         upPressed = false;
     }
-    else if(e.keyCode == 40){
+    else if(e.keyCode == 40||e.keyCode==83){
         downPressed = false;
     }}
 
