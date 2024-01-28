@@ -6,12 +6,14 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="foreground2"></div>
+    <div id="topBar"></div>
+    <img style="z-index:0" src="img/ship.gif" id="ship">
 <div id="gameArea">
+<canvas id="foreground">    </canvas>
 <canvas id="background"></canvas>
 
 </div>
-<div class="foreground">
+<div id="bottomBar">
 <div class="info"></div></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

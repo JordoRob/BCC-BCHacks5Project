@@ -1,13 +1,11 @@
 #gameArea{
     width: 100%;
-    height: 75%;
-    background-color: #000;
+    height: 79%;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
-    margin-top:5%;
-    background-image:url("../img/background.png");
+    margin-top:3%;
     background-size:cover;
    
 }
@@ -18,6 +16,14 @@
     top: 0;
     left: 0;
     z-index: 2;
+}
+#foreground{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
 }
 .info{
     background-color: rgb(0, 0, 44);
@@ -36,12 +42,12 @@
     position: absolute;
     top: 0;
     right: 0;
-    border-width: 0 64px 64px 0;
+    border-width: 0 4vh 4vh 0;
     border-style: solid;
-    border-color: rgb(0, 0, 85) rgb(56, 69, 92);;
+    border-color: rgb(0, 0, 85) rgb(45, 40, 55);
 }
 body{
-    background-color: rgb(56, 69, 92);
+    background-color: rgb(45, 40, 55);
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -84,20 +90,95 @@ body{
     }
 
 }
-.foreground{
+#bottomBar{
     position: absolute;
     bottom: 0;
     left: 0;
     z-index: 10;
     width: 100%;
-    height: 15%;
-    background: black;
-}.foreground2{
+    height: 15.1%;
+    background: rgb(45, 40, 55);
+}#topBar{
     position: absolute;
     top: 0;
     left: 0;
     z-index: 10;
     width: 100%;
-    height: 10%;
-    background: black;
+    height: 6%;
+    background: rgb(45, 40, 55);
+}.asteroid{
+    z-index: 3;
+}.healthContainer{
+    width:10vw;
+    height:100%;
+    overflow:hidden;
+    position: absolute;
+}.healthIcon{
+    width: 10vw;
+  top: -6.5vh;
+  left: -2vh;
+  position: absolute;
+}.gameOver{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width: 50%;
+    height: 50%;
+    background-color: rgba(114, 0, 0, 0.253);
+    color:white;
+    text-align: center;
+    border-radius: 12px;
+    transition:1s linear;
+    z-index: 11;
+    font-size: 300%;
+}
+/* CSS */
+.button-59 {
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter,sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  height: 64px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  min-width: 240px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-59:focus {
+  color: #171e29;
+}
+
+.button-59:hover {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+.button-59:active {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+@media (min-width: 768px) {
+  .button-59 {
+    min-width: 170px;
+  }
 }
