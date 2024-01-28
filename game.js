@@ -176,7 +176,7 @@ let spaceFacts=[
     let objectRotationMin=-5;
     console.log(maxY);
     if(maxY<800){
-        var factorTop=-.21;
+        var factorTop=-.24;
         var factorBottom=.58;
     }else{
         var factorTop=-.14;
