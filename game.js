@@ -6,15 +6,62 @@ $(document).ready(function() {
     setup();
 });
 function setup(){
-
-    var healthContainer = document.createElement("div");
-    healthContainer.className = "healthContainer";
-    var healthIcon=document.createElement("img");
-    healthIcon.src="img/heart.png";
-    healthIcon.className="healthIcon";
-    healthContainer.appendChild(healthIcon);
-document.getElementById("topBar").appendChild(healthContainer);
 let health=3;
+let spaceFacts=[
+    "The first space tourist was American businessman Dennis Tito, who visited the International Space Station in 2001.",
+    "The first artificial satellite in space was called Sputnik.",
+    "The first living creature in space was a dog named Laika, who was sent into orbit by the Soviet Union in 1957.",
+    "There are about 4,700 satellites still in space, but only an approximate 1,800 are still working.",
+    "A piece of space debris can reach speeds of 4.3 to 5 miles per second. That's nearly 7 times faster than a bullet and just about the equivalent of being hit by a bowling ball moving at 300 miles per hour.",
+    "An average total between 200 - 400 tracked space debris enter Earths atmosphere every year.",
+    "Your chances of getting hit by a falling piece of space waste is 10 million times smaller than the annual odds of being struck by lightning.",
+    "There are almost 10,000 metric tons of man-made space waste currently orbiting our planet",
+    "A one-millimeter object—the size of a pencil point—could destroy a spacecrafts ability to power up or to reach a certain altitude upon impact",
+    "Space debris can be as large as a school bus or as small as paint chips.",
+    "On average, one piece of space junk has fallen back into Earths atmosphere every day for the last 50 years.",
+    "Neutron stars can spin at a rate of 600 rotations per second",
+    "There is an uncountable number of stars in the known universe"
+]
+    var shipExplodeAnimation = [
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image()
+    ];
+    shipExplodeAnimation[0].src = "img/shipExplosion/tile000.png";
+    shipExplodeAnimation[1].src = "img/shipExplosion/tile001.png";
+    shipExplodeAnimation[2].src = "img/shipExplosion/tile002.png";
+    shipExplodeAnimation[3].src = "img/shipExplosion/tile003.png";
+    shipExplodeAnimation[4].src = "img/shipExplosion/tile004.png";
+    shipExplodeAnimation[5].src = "img/shipExplosion/tile005.png";
+    shipExplodeAnimation[6].src = "img/shipExplosion/tile006.png";
+    shipExplodeAnimation[7].src = "img/shipExplosion/tile007.png";
+    shipExplodeAnimation[8].src = "img/shipExplosion/tile008.png";
+    shipExplodeAnimation[9].src = "img/shipExplosion/tile009.png";
+    shipExplodeAnimation[10].src = "img/shipExplosion/tile010.png";
+    shipExplodeAnimation[11].src = "img/shipExplosion/tile011.png";
+    shipExplodeAnimation[12].src = "img/shipExplosion/tile012.png";
+    shipExplodeAnimation[13].src = "img/shipExplosion/tile013.png";
+    shipExplodeAnimation[14].src = "img/shipExplosion/tile014.png";
+    shipExplodeAnimation[15].src = "img/shipExplosion/tile015.png";
+    shipExplodeAnimation[16].src = "img/shipExplosion/tile016.png";
+    shipExplodeAnimation[17].src = "img/shipExplosion/tile017.png";
+
+
 
     var explodeAnimation = [
         new Image(),
@@ -56,6 +103,24 @@ let health=3;
     pointImg[7].src = "img/Garbage8.png";
     pointImg[8].src = "img/Garbage9.png";
 
+    var pop= new Audio('assets/pop.wav');
+    var recharge= new Audio('assets/recharge.mp3');
+    var music = new Audio('assets/music.mp3');
+    var damage = new Audio('assets/boom.wav');
+    var game_end= new Audio('assets/game-over.mp3');
+
+   audio= document.getElementById("audio");
+    music.volume=.2;
+    audio.onclick = function() {
+        if(music.paused){
+            music.play();
+            music.loop=true;
+            }else{
+                music.pause();
+            }
+
+}
+
 
     var score = 0;
     var ship = new Image();
@@ -94,33 +159,34 @@ let health=3;
     let shipRotation=90;
     let shipPosX=50;
     let shipPosY=450;
+    var audio = new Audio('audio_file.mp3');
 
+    let collection=[];
 
     let asteroids=[];
     let asteroidCount=0;
-    let objectSpeedXMax=-5;
-    let objectSpeedXMin=-1;
+    let objectSpeedXMax=5;
+    let objectSpeedXMin=1;
     let objectRotationMax=5;
     let objectRotationMin=-5;
 
     let pointCount=0;
     let points = [];
-
-
+    let info=document.getElementsByClassName("info")[0];
+    info.innerHTML=spaceFacts[Math.floor(Math.random() * (10 - 0 + 1) ) + 0];
     var main = setInterval(function() {
         ctx.clearRect(0, 0, BG.width, BG.height);
         ctx2.clearRect(0, 0, FG.width, FG.height);
-        console.log(maxX, maxY);
-        
+        $("#scoreCard").html(score);
 
         
         ctx.drawImage(background, BGPosition, 0);
      // draw image 2
         ctx.drawImage(background, BGPosition+ BG.width, 0);
 
-        ctx2.drawImage(foreground, foregroundPosition, -.14*maxY);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, -.14*maxY);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, -.14*maxY);
+        ctx2.drawImage(foreground, foregroundPosition, -.16*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, -.16*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, -.16*maxY);
 
         ctx2.drawImage(foreground, foregroundPosition, .57*maxY);
         ctx2.drawImage(foreground, foregroundPosition+ foreground.width, .57*maxY);
@@ -153,11 +219,11 @@ let health=3;
 
    var secondary= setInterval(function(){
         difficultyCounter+=1;
-        let info=document.getElementsByClassName("info")[0];
         info.style.left="-50%";
         setTimeout(function(){
             info.remove();
             info.style.left="150%";
+            info.innerHTML=spaceFacts[Math.floor(Math.random() * (10 - 0 + 1) ) + 0];
         document.getElementById("bottomBar").appendChild(info);
             setTimeout(function(){
                 info.style.left="50%";
@@ -177,15 +243,15 @@ let health=3;
 //draw using canvas
 
         if(rightPressed) {
-            shipPosX = Math.min(shipPosX+7, maxX);
+            shipPosX = Math.min(shipPosX+5, maxX);
             shipRotation=90;
         }
         else if(leftPressed) {
-            shipPosX = Math.max(shipPosX-7, 0);
+            shipPosX = Math.max(shipPosX-5, 0);
             shipRotation=-90;
         }
     if(upPressed) {
-        shipPosY = Math.max(shipPosY-7, 0);
+        shipPosY = Math.max(shipPosY-5, 20);
             if(rightPressed){
                 shipRotation=45;
             }else if(leftPressed){
@@ -194,7 +260,7 @@ let health=3;
             shipRotation=0;}
         }
         else if(downPressed) {
-            shipPosY = Math.max(shipPosY+7, 0);
+            shipPosY = Math.min(shipPosY+5, maxY-20);
             if(rightPressed){
                 shipRotation=135;
             }else if(leftPressed){
@@ -202,9 +268,8 @@ let health=3;
             }else{
             shipRotation=180;}
         }
-        if(!blink){
-        drawImage(ship, shipPosX, shipPosY,1, shipRotation);}
-    }
+        drawImage(ship, shipPosX, shipPosY,1, shipRotation);
+        }
 
     
     
@@ -237,7 +302,7 @@ let health=3;
     }}
 
     function handleAsteroid(){
-        if(asteroidCount<difficultyCounter*3 && asteroidCount<20){
+        if(asteroidCount<difficultyCounter+5 && asteroidCount<40){
             spawnAsteroid();
             asteroidCount+=1;
         }
@@ -269,13 +334,14 @@ let health=3;
             if(checkCollision(asteroids[i])&&!invulnerable){
                 badCollide();
                 asteroids[i]['explode']=12;
+                damage.play();
             }
         }
     }
 
     function spawnAsteroid(){
-        let objectSpeedX=Math.floor(Math.random() * (objectSpeedXMax - objectSpeedXMin + 1) ) + objectSpeedXMin;
-        let objectSpeedY=Math.floor(Math.random() * (objectSpeedXMax - objectSpeedXMin + 1) ) + objectSpeedXMin;
+        let objectSpeedX=-1*(Math.floor(Math.random() * (objectSpeedXMax - objectSpeedXMin + 1) ) + objectSpeedXMin);
+        let objectSpeedY=Math.round(Math.random()) * 2 - 1*(Math.floor(Math.random() * (objectSpeedXMax - objectSpeedXMin + 1) ) + objectSpeedXMin);
         let objectRotation=Math.floor(Math.random() * (objectRotationMax - objectRotationMin + 1) ) + objectRotationMin;
         let asteroidScale=Math.floor(Math.random() * (3 - 1 + 1) ) + 1;
         let asteroidX=maxX;
@@ -308,6 +374,13 @@ let health=3;
                 drawImage(pointImg[points[i]['type']], points[i]['x'], points[i]['y'],points[i]['scale'], points[i]['rotation']);
             }
             if(checkCollision(points[i])){
+                pop.play();
+                let tempImg=pointImg[points[i]['type']].cloneNode(true);
+                
+                tempImg.className="collectionIMG";
+                tempImg.id="collectionIMG"+score;
+                collection.push(tempImg);
+                document.getElementById("collection").appendChild(tempImg);
                 points.splice(i,1);
                 pointCount-=1;
                 score+=1;
@@ -316,13 +389,13 @@ let health=3;
     }
 
     function spawnPoints(){
-        let objectSpeedX=Math.floor(Math.random() * (objectSpeedXMax - objectSpeedXMin + 1) ) + objectSpeedXMin;
-        let objectSpeedY=Math.floor(Math.random() * (objectSpeedXMax - objectSpeedXMin + 1) ) + objectSpeedXMin;
+        let objectSpeedX=-1*(Math.floor(Math.random() * (objectSpeedXMax - objectSpeedXMin + 1) ) + objectSpeedXMin);
+        let objectSpeedY=Math.round(Math.random()) * 2 - 1*(Math.floor(Math.random() * (objectSpeedXMax - objectSpeedXMin + 1) ) + objectSpeedXMin);
         let objectRotation=Math.floor(Math.random() * (objectRotationMax - objectRotationMin + 1) ) + objectRotationMin;
-        let pointScale=Math.floor(Math.random() * (3 - 1 + 1) ) + 1;
+        let pointScale=Math.floor(Math.random() * (2 - 1 + 1) ) + 1;
         let pointX=maxX;
         let pointY=Math.floor(Math.random() * (maxY - 0 + 1) ) + 0;
-        let pointType=Math.floor(Math.random() * (3 - 0 + 1) ) + 0;
+        let pointType=Math.floor(Math.random() * (8 - 0 + 1) ) + 0;
         points.push({
             x:pointX,
             y:pointY,
@@ -369,15 +442,17 @@ let health=3;
 
     function badCollide(){
         health-=1;
-            let healthContainer=document.getElementsByClassName("healthContainer")[0];
-            if(health==2){
-                healthContainer.style.width=5+"vw";
-            }else if(health==1){   
-                healthContainer.style.width=2.7+"vw";
-            }else
+                document.getElementsByClassName("healthIcon")[0].remove();
         if(health==0){
-            healthContainer.style.width=0+"vw";
-            gameOver();}
+            gameOver();
+            rightPressed=false;
+            leftPressed=false;
+            upPressed=false;
+            downPressed=false;
+            document.onkeydown=null;
+            document.onkeyup=null;
+        
+        }if(health>0){
 
         rightPressed=false;
         leftPressed=false;
@@ -386,18 +461,28 @@ let health=3;
         document.onkeydown=null;
         document.onkeyup=null;
         invulnerable=true;
-        var temp=setInterval(function(){
-            blink=!blink;
-        },100);
+            ship.src="img/shield.png";
         setTimeout(function(){
             document.onkeydown = keyDownHandler;
             document.onkeyup = keyUpHandler;
+            var temp=setInterval(function(){
+            blink=!blink;
+            if(blink){
+                ship.src="img/ship.gif";
+            }else{
+                ship.src="img/shield.png";
+            }
+            },100);
+                    setTimeout(function(){
+                                invulnerable=false;
+                                clearInterval(temp);
+                                ship.src="img/ship.gif";
+                                recharge.play();
+                            },1500);
+
         },500);
-        setTimeout(function(){
-            invulnerable=false;
-            clearInterval(temp);
-        },2000);
-    }
+        
+    }}
     function drawImage(image, x, y, scale, rotation){
         ctx.save();
         rotation=rotation*Math.PI/180;
@@ -408,9 +493,16 @@ let health=3;
     } 
     
     function gameOver(){
+        game_end.play();
+        invulnerable=true;
+        shipExplodes();
+        
+
+        setTimeout(function(){
         clearInterval(main);
         clearInterval(secondary);
-        clearInterval(pointSpawn);
+        clearInterval(pointSpawn)
+        
         let gameOver=document.createElement("div");
         gameOver.className="gameOver";
         let gameOverText=document.createElement("h1");
@@ -421,6 +513,12 @@ let health=3;
         gameOver.appendChild(result);
         gameOver.style.zIndex=100;
         document.body.appendChild(gameOver);
+        let collecton = document.createElement("div");
+        collection.id="collection2";
+        for(let i=0; i<collection.length; i++){
+            collecton.appendChild(collection[i]);
+        }
+        gameOver.appendChild(collecton);
         let restart=document.createElement("button");
         restart.className="button-59";
         restart.innerHTML="RESTART";
@@ -428,5 +526,17 @@ let health=3;
             location.reload();
         }
         gameOver.appendChild(restart);
+        
+    },2000);
+    }
+    function shipExplodes(){
+        let explodeCount=0;
+        let explode=setInterval(function(){
+            ship=shipExplodeAnimation[explodeCount];
+            explodeCount+=1;
+            if(explodeCount>17){
+                clearInterval(explode);
+            }
+        },100);
     }
 }

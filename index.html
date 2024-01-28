@@ -6,8 +6,23 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="topBar"></div>
-    <img style="z-index:0" src="img/ship.gif" id="ship">
+    <div id="topBar">
+        <img id="audio" src="img/volume.png">
+        <span style="display:flex;">
+         <div class="scoreCont">
+            <span>Score: </span><span id="scoreCard"></span>
+        </div>
+        <div id="collection">
+
+        </div>
+        </span>
+        <div class="healthContainer">
+            <img class='healthIcon' src="img/shield.png">
+            <img class='healthIcon' src="img/shield.png">
+            <img class='healthIcon' src="img/shield.png">
+        </div>
+       
+    </div>
 <div id="gameArea">
 <canvas id="foreground">    </canvas>
 <canvas id="background"></canvas>

@@ -1,6 +1,11 @@
+body{
+    font-family: url('../Workbench.ttf');
+    font-size: 0.6vw;
+}
+
 #gameArea{
     width: 100%;
-    height: 79%;
+    height: 79vh;
     position: absolute;
     top: 0;
     left: 0;
@@ -28,15 +33,23 @@
 .info{
     background-color: rgb(0, 0, 44);
     position:absolute;
-    bottom:20%;
+    bottom:10%;
     left:50%;
     transform:translateX(-50%);
     width: 25%;
-    height: 50%;
+    height: 80%;
     border-radius: 12px;
     transition:1s linear;
     z-index: 11;
-
+    color:yellow;
+    font-size:180%;
+    padding:1vh;
+    padding-right:2%;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    box-shadow: inset 0 0 10px #000000;
+    text-align: left;
 }.info:before{
     content: "";
     position: absolute;
@@ -96,7 +109,7 @@ body{
     left: 0;
     z-index: 10;
     width: 100%;
-    height: 15.1%;
+    height: 15.1vh;
     background: rgb(45, 40, 55);
 }#topBar{
     position: absolute;
@@ -104,21 +117,29 @@ body{
     left: 0;
     z-index: 10;
     width: 100%;
-    height: 6%;
+    height: 6vh;
     background: rgb(45, 40, 55);
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }.asteroid{
     z-index: 3;
 }.healthContainer{
-    width:10vw;
+    width:18vh;
     height:100%;
-    overflow:hidden;
-    position: absolute;
+    display:flex;
+    flex-direction: row;
+    gap:1vh;
+    justify-content: left;
+    margin-left:0.5vh;
+    margin-top:0.5vh;
 }.healthIcon{
-    width: 10vw;
-  top: -6.5vh;
-  left: -2vh;
-  position: absolute;
-}.gameOver{
+    width: 5vh;
+    height:5vh;
+}
+
+
+.gameOver{
     position:absolute;
     top:50%;
     left:50%;
@@ -181,4 +202,29 @@ body{
   .button-59 {
     min-width: 170px;
   }
+}
+.scoreCont{
+    font-size:300%;
+    color:rgb(114, 97, 160);
+    margin-left:0.5vh;
+    margin-top:0.7vh;
+}
+#collection{
+    width:50vh;
+    margin:0.5vh;
+    box-shadow: inset 0 0 10px #000000;
+    gap:0.5vh;
+    overflow:hidden;
+    border-radius: 4px;
+}
+.collectionIMG{
+    margin:0.3vh;
+}
+#collection2{
+    width:40%;
+    height:20%;
+    margin-left: 50%;
+    transform:translate(-50%);
+    box-shadow: inset 0 0 10px #000000;
+    margin-bottom:2vh;
 }
