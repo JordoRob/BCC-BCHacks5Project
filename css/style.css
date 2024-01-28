@@ -36,8 +36,8 @@ body{
     bottom:10%;
     left:50%;
     transform:translateX(-50%);
-    width: 25%;
-    height: 80%;
+    width: 45%;
+    height: 95%;
     border-radius: 12px;
     transition:1s linear;
     z-index: 11;
@@ -109,7 +109,7 @@ body{
     left: 0;
     z-index: 10;
     width: 100%;
-    height: 15.1vh;
+    height: 12vh;
     background: rgb(45, 40, 55);
 }#topBar{
     position: absolute;
