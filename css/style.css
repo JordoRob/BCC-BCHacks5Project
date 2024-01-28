@@ -5,7 +5,7 @@ body{
 
 #gameArea{
     width: 100%;
-    height: 79vh;
+    height: 85vh;
     position: absolute;
     top: 0;
     left: 0;
@@ -42,7 +42,7 @@ body{
     transition:1s linear;
     z-index: 11;
     color:yellow;
-    font-size:180%;
+    font-size:140%;
     padding:1vh;
     padding-right:2%;
     box-sizing: border-box;
@@ -109,7 +109,7 @@ body{
     left: 0;
     z-index: 10;
     width: 100%;
-    height: 15.1vh;
+    height: 10vh;
     background: rgb(45, 40, 55);
 }#topBar{
     position: absolute;
@@ -117,7 +117,7 @@ body{
     left: 0;
     z-index: 10;
     width: 100%;
-    height: 6vh;
+    height: 5vh;
     background: rgb(45, 40, 55);
     display:flex;
     flex-direction: row;

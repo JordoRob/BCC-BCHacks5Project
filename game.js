@@ -188,13 +188,13 @@ let spaceFacts=[
      // draw image 2
         ctx.drawImage(background, BGPosition+ BG.width, 0);
 
-        ctx2.drawImage(foreground, foregroundPosition, -.16*maxY);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, -.16*maxY);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, -.16*maxY);
+        ctx2.drawImage(foreground, foregroundPosition, -.22*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, -.22*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, -.22*maxY);
 
-        ctx2.drawImage(foreground, foregroundPosition, .57*maxY);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, .57*maxY);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, .57*maxY);
+        ctx2.drawImage(foreground, foregroundPosition, .54*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, .54*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, .54*maxY);
         
  
    
