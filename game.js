@@ -39,8 +39,23 @@ let health=3;
         new Image(),
         new Image(),
         new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image(),
+        new Image()
+    
     ];
     pointImg[0].src = "img/Garbage1.png";
+    pointImg[1].src = "img/Garbage2.png";
+    pointImg[2].src = "img/Garbage3.png";
+    pointImg[3].src = "img/Garbage4.png";
+    pointImg[4].src = "img/Garbage5.png";
+    pointImg[5].src = "img/Garbage6.png";
+    pointImg[6].src = "img/Garbage7.png";
+    pointImg[7].src = "img/Garbage8.png";
+    pointImg[8].src = "img/Garbage9.png";
+
 
     var score = 0;
     var ship = new Image();
@@ -95,7 +110,7 @@ let health=3;
     var main = setInterval(function() {
         ctx.clearRect(0, 0, BG.width, BG.height);
         ctx2.clearRect(0, 0, FG.width, FG.height);
-
+        console.log(maxX, maxY);
         
 
         
@@ -103,13 +118,13 @@ let health=3;
      // draw image 2
         ctx.drawImage(background, BGPosition+ BG.width, 0);
 
-        ctx2.drawImage(foreground, foregroundPosition, -120);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, -120);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, -120);
+        ctx2.drawImage(foreground, foregroundPosition, -.14*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, -.14*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, -.14*maxY);
 
-        ctx2.drawImage(foreground, foregroundPosition, 510);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, 510);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, 510);
+        ctx2.drawImage(foreground, foregroundPosition, .57*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, .57*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, .57*maxY);
         
  
    
@@ -124,10 +139,10 @@ let health=3;
             BGPosition = 0
     
     
-
+    shipMovement();
     handleAsteroid();
     handlePoints();
-    shipMovement();
+    
         
     
 
@@ -162,15 +177,15 @@ let health=3;
 //draw using canvas
 
         if(rightPressed) {
-            shipPosX += 7;
+            shipPosX = Math.min(shipPosX+7, maxX);
             shipRotation=90;
         }
         else if(leftPressed) {
-            shipPosX -= 7;
+            shipPosX = Math.max(shipPosX-7, 0);
             shipRotation=-90;
         }
     if(upPressed) {
-            shipPosY -= 7;
+        shipPosY = Math.max(shipPosY-7, 0);
             if(rightPressed){
                 shipRotation=45;
             }else if(leftPressed){
@@ -179,7 +194,7 @@ let health=3;
             shipRotation=0;}
         }
         else if(downPressed) {
-            shipPosY+= 7;
+            shipPosY = Math.max(shipPosY+7, 0);
             if(rightPressed){
                 shipRotation=135;
             }else if(leftPressed){
@@ -324,7 +339,19 @@ let health=3;
 
 
     function checkCollision(a){
-      return a['x']<shipPosX+ship.width/2 && a['x']+a['width']>shipPosX-ship.width/2 && a['y']<shipPosY+ship.height/2 && a['y']+a['height']>shipPosY-ship.height/2;
+        let r1x = shipPosX;                          // left edge
+        let r1y = shipPosY;                          // top edge
+        let r1w = ship.width; // right edge
+        let r1h = ship.height; // bottom edge
+        let r2x = a['x'];                          // left edge
+        let r2y = a['y'];                          // top edge
+        let r2w = a['width']; // right edge
+        let r2h = a['height']; // bottom edge
+        return (r1x + r1w >= r2x &&    // r1 right edge past r2 left
+        r1x <= r2x + r2w &&    // r1 left edge past r2 right
+        r1y + r1h >= r2y &&    // r1 top edge past r2 bottom
+        r1y <= r2y + r2h)     // r1 bottom edge past r2 top
+
     }
 
 
