@@ -159,6 +159,7 @@ let spaceFacts=[
     let foregroundPosition=0;
     let scrollSpeed=0.2;
     let BGPosition=0;
+    let shipScale=maxX/2450;
     let difficultyCounter=1;
     let shipRotation=90;
     let shipPosX=50;
@@ -173,7 +174,14 @@ let spaceFacts=[
     let objectSpeedXMin=1;
     let objectRotationMax=5;
     let objectRotationMin=-5;
-
+    console.log(maxY);
+    if(maxY<800){
+        var factorTop=-.21;
+        var factorBottom=.58;
+    }else{
+        var factorTop=-.14;
+        var factorBottom=.57;
+    }
     let pointCount=0;
     let points = [];
     let info=document.getElementsByClassName("info")[0];
@@ -188,13 +196,13 @@ let spaceFacts=[
      // draw image 2
         ctx.drawImage(background, BGPosition+ BG.width, 0);
 
-        ctx2.drawImage(foreground, foregroundPosition, -.16*maxY);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, -.16*maxY);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, -.16*maxY);
+        ctx2.drawImage(foreground, foregroundPosition, factorTop*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, factorTop*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, factorTop*maxY);
 
-        ctx2.drawImage(foreground, foregroundPosition, .57*maxY);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, .57*maxY);
-        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, .57*maxY);
+        ctx2.drawImage(foreground, foregroundPosition, factorBottom*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width, factorBottom*maxY);
+        ctx2.drawImage(foreground, foregroundPosition+ foreground.width*2, factorBottom*maxY);
         
  
    
@@ -272,7 +280,7 @@ let spaceFacts=[
             }else{
             shipRotation=180;}
         }
-        drawImage(ship, shipPosX, shipPosY,1, shipRotation);
+        drawImage(ship, shipPosX, shipPosY,shipScale, shipRotation);
         }
 
     
@@ -347,7 +355,7 @@ let spaceFacts=[
         let objectSpeedX=-1*(Math.floor(Math.random() * (objectSpeedXMax - objectSpeedXMin + 1) ) + objectSpeedXMin);
         let objectSpeedY=Math.round(Math.random()) * 2 - 1*(Math.floor(Math.random() * (objectSpeedXMax - objectSpeedXMin + 1) ) + objectSpeedXMin);
         let objectRotation=Math.floor(Math.random() * (objectRotationMax - objectRotationMin + 1) ) + objectRotationMin;
-        let asteroidScale=Math.floor(Math.random() * (3 - 1 + 1) ) + 1;
+        let asteroidScale=shipScale*Math.floor(Math.random() * (3 - 1 + 1) ) + 1;
         let asteroidX=maxX;
         let asteroidY=Math.floor(Math.random() * (maxY - 0 + 1) ) + 0;
         asteroids.push({
@@ -418,8 +426,8 @@ let spaceFacts=[
     function checkCollision(a){
         let r1x = shipPosX;                          // left edge
         let r1y = shipPosY;                          // top edge
-        let r1w = ship.width; // right edge
-        let r1h = ship.height; // bottom edge
+        let r1w = ship.width*shipScale; // right edge
+        let r1h = ship.height*shipScale; // bottom edge
         let r2x = a['x'];                          // left edge
         let r2y = a['y'];                          // top edge
         let r2w = a['width']; // right edge
